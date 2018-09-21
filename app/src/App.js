@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import Title from './Title';
+import PropTypes from 'prop-types';
+
+import Button from './Button';
 import Square from './Square';
+import Timer from './Timer';
 
 class App extends Component {
   render() {
     return (
-      <div data-id='1'>
-        {['blue', 'red', 'green'].map(
-          (cor, key) => ( <Square key={key} color={cor} /> )
-        )}
+      <div>
+        <Button>Clique em mim</Button>
       </div>
     );
   }
