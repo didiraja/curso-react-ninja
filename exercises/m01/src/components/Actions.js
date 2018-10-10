@@ -11,6 +11,8 @@ const Button = styled.button`
     margin: ${spacing};
     padding: ${spacing};
     width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
 `
 
 const Actions = () => (

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 const spacing = '.5rem'
@@ -28,25 +29,36 @@ const List = styled.ul`
 `
 const TextWrap = styled.div``
 
-const UserInfo = () => (
+const UserInfo = ({ userinfo }) => (
     <Wrapper className="user-info">
         <Img
-        src="https://via.placeholder.com/500/000000/ffffff?text=Avatar"
-        alt="avatar de didiraja"
+        src={userinfo.photo}
+        alt={`avatar de ${userinfo.login}`}
         />
 
         <TextWrap>
             <Title className="username">
-                <a href="https://github.com/didiraja">Dico Didiraja</a>
+                <a href={`https://github.com/${userinfo.login}`} target="_black">{userinfo.username}</a>
             </Title>
 
             <List className="repos-info">
-                <li>Repositórios: 0</li>
-                <li>Seguidores: 0</li>
-                <li>Seguindo: 0</li>
+                <li>Repositórios: {userinfo.repos}</li>
+                <li>Seguidores: {userinfo.followers}</li>
+                <li>Seguindo: {userinfo.following}</li>
             </List>
         </TextWrap>
     </Wrapper>
 )
+
+UserInfo.propTypes = {
+    userinfo: PropTypes.shape({
+        username: PropTypes.string.isRequired,
+        photo: PropTypes.string.isRequired,
+        login: PropTypes.string.isRequired,
+        repos: PropTypes.number.isRequired,
+        followers: PropTypes.number.isRequired,
+        following: PropTypes.number.isRequired
+    })
+}
 
 export default UserInfo

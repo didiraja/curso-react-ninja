@@ -1,38 +1,54 @@
 import React, { Component } from 'react';
-import Search from './components/Search';
-import UserInfo from './components/UserInfo';
-import Actions from './components/Actions';
-import Repos from './components/Repos';
+import ajax from '@fdaciuk/ajax';
 
-const App = () => (
-  <div className="app">
+import AppContent from './components/AppContent';
 
-    <Search />
-
-    <UserInfo />
-    
-    <Actions />
-
-    <Repos
-      className='repos'
-      title="Repositórios"
-      repos={[{
-        name: "Nome do repositório",
-        link: "#"
-      }]}
+class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      userinfo: null,
+      repos: [],
+      starred: []
+    }
+  }
+  render() {
+    return <AppContent
+      userinfo={this.state.userinfo}
+      repos={this.state.repos}
+      starred={this.state.starred}
+      handleSearch={(e) => this.handleSearch(e)}
     />
-    
-    <Repos
-      className='starred'
-      title="Favoritos"
-      repos={[{
-        name: "Nome do repositório",
-        link: "#"
-      }]}
-    />
+  }
 
+  handleSearch(e) {
+    const value = e.target.value
+    const keyCode = e.which || e.keyCode
+    const ENTER = 13
 
-  </div>
-);
+    if (keyCode === ENTER) {
+      ajax()
+          .get(`https://api.github.com/users/${value}`)
+          .then(
+              (result) => {
+
+                this.setState ({
+                  userinfo: {
+                    username: result.name,
+                    photo: result.avatar_url,
+                    login: result.login,
+                    repos: result.public_repos,
+                    followers: result.followers,
+                    following: result.following
+                  }
+                })
+
+                console.log(result)
+              } 
+          )
+    } 
+  }
+
+}
 
 export default App;

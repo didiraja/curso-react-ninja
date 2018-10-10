@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Input = styled.input`
@@ -9,15 +10,20 @@ const Input = styled.input`
     min-height: 2rem;
     padding: .5rem;
     font-size: 1.3rem;
-}
 `
  
-const Search = () => (
+const Search = ({ handleSearch }) => (
     <div className="search">
       <Input
         type="search"
-        placeholder="Digite o nome do usuário" />
+        placeholder="Digite o nome do usuário"
+        onKeyUp={handleSearch}
+        />
     </div>
 )
+
+Search.propTypes = {
+    handleSearch: PropTypes.func.isRequired
+}
 
 export default Search
