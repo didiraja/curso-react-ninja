@@ -1,9 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
+const Wrapper = styled.div`
+    margin-left: .5rem;
+`
 
 const Repos = ({ className, title, repos  }) => (
-    <div className={className}>
+    <Wrapper className={className}>
         <h2>{title}:</h2>
 
         <ul>
@@ -11,7 +15,7 @@ const Repos = ({ className, title, repos  }) => (
                 <li key={key}><a href={repo.link}>{repo.name}</a></li>
             ) )}
         </ul>
-    </div>
+    </Wrapper>
 )
 
 Repos.defaultProps = {
