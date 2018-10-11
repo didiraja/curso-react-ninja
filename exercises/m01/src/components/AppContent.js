@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components'
 
 import Search from './Search';
 import UserInfo from './UserInfo';
 import Actions from './Actions';
 import Repos from './Repos';
+
+const ReposWrapper = styled.div`
+    display: flex;
+    justify-content: space-around;
+`
 
 const AppContent = ({ userinfo, repos, starred, handleSearch }) => (
     <div className="app">
@@ -15,21 +21,24 @@ const AppContent = ({ userinfo, repos, starred, handleSearch }) => (
         
         {!!userinfo && <Actions />}
 
-        {!!repos.length &&
-            <Repos
-                className='repos'
-                title="Repositórios"
-                repos={repos}
-            />
-        }
+        <ReposWrapper>
+            {!!repos.length &&
+                <Repos
+                    className='repos'
+                    title="Repositórios"
+                    repos={repos}
+                />
+            }
 
-        {!!starred.length &&
-            <Repos
-                className='starred'
-                title="Favoritos"
-                repos={starred}
-            />
-        }
+            {!!starred.length &&
+                <Repos
+                    className='starred'
+                    title="Favoritos"
+                    repos={starred}
+                />
+            }
+        </ReposWrapper>
+
       </div>
 )
 

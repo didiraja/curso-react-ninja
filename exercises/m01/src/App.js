@@ -43,7 +43,45 @@ class App extends Component {
                   }
                 })
 
+                // console.log(result)
+              } 
+          )
+      
+          ajax()
+          .get(`https://api.github.com/users/${value}/repos`)
+          .then(
+              (result) => {
+
                 console.log(result)
+
+                const reposUser = []
+
+                result.map(
+                  (response) => reposUser.push(response.name)
+                )
+
+                this.setState ({
+                  repos: reposUser
+                })
+
+              } 
+          )
+          
+          ajax()
+          .get(`https://api.github.com/users/${value}/starred`)
+          .then(
+              (result) => {
+
+                const starsUser = []
+
+                result.map(
+                  (response) => starsUser.push(response.name)
+                )
+
+                this.setState ({
+                  starred: starsUser
+                })
+
               } 
           )
     } 
