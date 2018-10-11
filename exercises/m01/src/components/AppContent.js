@@ -12,14 +12,14 @@ const ReposWrapper = styled.div`
     justify-content: space-around;
 `
 
-const AppContent = ({ userinfo, repos, starred, handleSearch }) => (
+const AppContent = ({ userinfo, repos, starred, handleSearch, getRepos, getStarred }) => (
     <div className="app">
 
         <Search handleSearch={handleSearch} />
 
         {!!userinfo && <UserInfo userinfo={userinfo} />}
         
-        {!!userinfo && <Actions />}
+        {!!userinfo && <Actions getRepos={getRepos} getStarred={getStarred} />}
 
         <ReposWrapper>
             {!!repos.length &&

@@ -12,12 +12,36 @@ class App extends Component {
       starred: []
     }
   }
+
+  getRepos (type) {
+    return (e) => {
+      ajax()
+          .get(`https://api.github.com/users/didiraja/${type}`)
+          .then(
+              (result) => {
+
+                this.setState ({
+                  [type]: result.map((repo) => {
+                    return {
+                      name: repo.name,
+                      link: repo.html_url,
+                    }
+                  })
+                })
+
+              } 
+          )
+    }
+  }
+
   render() {
     return <AppContent
       userinfo={this.state.userinfo}
       repos={this.state.repos}
       starred={this.state.starred}
       handleSearch={(e) => this.handleSearch(e)}
+      getRepos={this.getRepos('repos')}
+      getStarred={this.getRepos('starred')}
     />
   }
 
@@ -46,44 +70,7 @@ class App extends Component {
                 // console.log(result)
               } 
           )
-      
-          ajax()
-          .get(`https://api.github.com/users/${value}/repos`)
-          .then(
-              (result) => {
 
-                console.log(result)
-
-                const reposUser = []
-
-                result.map(
-                  (response) => reposUser.push(response.name)
-                )
-
-                this.setState ({
-                  repos: reposUser
-                })
-
-              } 
-          )
-          
-          ajax()
-          .get(`https://api.github.com/users/${value}/starred`)
-          .then(
-              (result) => {
-
-                const starsUser = []
-
-                result.map(
-                  (response) => starsUser.push(response.name)
-                )
-
-                this.setState ({
-                  starred: starsUser
-                })
-
-              } 
-          )
     } 
   }
 

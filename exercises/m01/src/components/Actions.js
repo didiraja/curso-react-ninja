@@ -15,10 +15,10 @@ const Button = styled.button`
     font-weight: bold;
 `
 
-const Actions = () => (
+const Actions = ({ getRepos, getStarred }) => (
     <Wrapper className="actions">
-        <Button>Ver repositórios</Button>
-        <Button>Ver favoritos</Button>
+        <Button onClick={getRepos}>Ver repositórios</Button>
+        <Button onClick={getStarred}>Ver favoritos</Button>
     </Wrapper>
 )
 
