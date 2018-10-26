@@ -15,8 +15,11 @@ class App extends Component {
 
   getRepos (type) {
     return (e) => {
+
+      const username = this.state.userinfo.login
+
       ajax()
-          .get(`https://api.github.com/users/didiraja/${type}`)
+          .get(this.getGitHubApiURL(username, type))
           .then(
               (result) => {
 
@@ -45,6 +48,15 @@ class App extends Component {
     />
   }
 
+  getGitHubApiURL (username, type) {
+
+    const internalUser = username ? `/${username}` : ''
+    const internalType = type ? `/${type}` : ''
+
+    return `https://api.github.com/users${internalUser}${internalType}`
+
+  }
+
   handleSearch(e) {
     const value = e.target.value
     const keyCode = e.which || e.keyCode
@@ -64,7 +76,9 @@ class App extends Component {
                     repos: result.public_repos,
                     followers: result.followers,
                     following: result.following
-                  }
+                  },
+                  repos: [],
+                  starred: []
                 })
 
                 // console.log(result)
