@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 const spacing = '.5rem'
@@ -21,5 +22,10 @@ const Actions = ({ getRepos, getStarred }) => (
         <Button onClick={getStarred}>Ver favoritos</Button>
     </Wrapper>
 )
+
+Actions.propTypes = {
+    getRepos: PropTypes.func.isRequired,
+    getStarred: PropTypes.func.isRequired
+}
 
 export default Actions

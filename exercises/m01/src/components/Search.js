@@ -12,18 +12,20 @@ const Input = styled.input`
     font-size: 1.3rem;
 `
  
-const Search = ({ handleSearch }) => (
+const Search = ({ isDisabled, handleSearch }) => (
     <div className="search">
       <Input
         type="search"
         placeholder="Digite o nome do usuário"
+        disabled={isDisabled}
         onKeyUp={handleSearch}
         />
     </div>
 )
 
 Search.propTypes = {
-    handleSearch: PropTypes.func.isRequired
+    handleSearch: PropTypes.func.isRequired,
+    isDisabled: PropTypes.bool.isRequired
 }
 
 export default Search
